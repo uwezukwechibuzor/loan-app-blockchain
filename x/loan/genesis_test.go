@@ -11,6 +11,15 @@ import (
 
 func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
+		LoanList: []types.Loan{
+			{
+				Id: 0,
+			},
+			{
+				Id: 1,
+			},
+		},
+		LoanCount: 2,
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -19,5 +28,8 @@ func TestGenesis(t *testing.T) {
 	got := loan.ExportGenesis(ctx, *k)
 	require.NotNil(t, got)
 
+	require.Len(t, got.LoanList, len(genesisState.LoanList))
+	require.Subset(t, genesisState.LoanList, got.LoanList)
+	require.Equal(t, genesisState.LoanCount, got.LoanCount)
 	// this line is used by starport scaffolding # genesis/test/assert
 }
