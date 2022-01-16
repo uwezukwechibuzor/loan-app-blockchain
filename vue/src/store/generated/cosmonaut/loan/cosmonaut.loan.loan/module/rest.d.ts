@@ -9,6 +9,7 @@ export interface LoanLoan {
     borrower?: string;
     lender?: string;
 }
+export declare type LoanMsgApproveLoanResponse = object;
 export declare type LoanMsgRequestLoanResponse = object;
 export interface LoanQueryAllLoanResponse {
     Loan?: LoanLoan[];

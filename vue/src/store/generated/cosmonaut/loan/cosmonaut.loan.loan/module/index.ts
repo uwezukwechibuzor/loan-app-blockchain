@@ -4,10 +4,12 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
+import { MsgApproveLoan } from "./types/loan/tx";
 import { MsgRequestLoan } from "./types/loan/tx";
 
 
 const types = [
+  ["/cosmonaut.loan.loan.MsgApproveLoan", MsgApproveLoan],
   ["/cosmonaut.loan.loan.MsgRequestLoan", MsgRequestLoan],
   
 ];
@@ -37,6 +39,7 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
+    msgApproveLoan: (data: MsgApproveLoan): EncodeObject => ({ typeUrl: "/cosmonaut.loan.loan.MsgApproveLoan", value: data }),
     msgRequestLoan: (data: MsgRequestLoan): EncodeObject => ({ typeUrl: "/cosmonaut.loan.loan.MsgRequestLoan", value: data }),
     
   };
