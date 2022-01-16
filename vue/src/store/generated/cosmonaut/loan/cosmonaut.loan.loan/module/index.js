@@ -3,9 +3,11 @@ import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
 import { MsgApproveLoan } from "./types/loan/tx";
+import { MsgRepayLoan } from "./types/loan/tx";
 import { MsgRequestLoan } from "./types/loan/tx";
 const types = [
     ["/cosmonaut.loan.loan.MsgApproveLoan", MsgApproveLoan],
+    ["/cosmonaut.loan.loan.MsgRepayLoan", MsgRepayLoan],
     ["/cosmonaut.loan.loan.MsgRequestLoan", MsgRequestLoan],
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -22,6 +24,7 @@ const txClient = async (wallet, { addr: addr } = { addr: "http://localhost:26657
     return {
         signAndBroadcast: (msgs, { fee, memo } = { fee: defaultFee, memo: "" }) => client.signAndBroadcast(address, msgs, fee, memo),
         msgApproveLoan: (data) => ({ typeUrl: "/cosmonaut.loan.loan.MsgApproveLoan", value: data }),
+        msgRepayLoan: (data) => ({ typeUrl: "/cosmonaut.loan.loan.MsgRepayLoan", value: data }),
         msgRequestLoan: (data) => ({ typeUrl: "/cosmonaut.loan.loan.MsgRequestLoan", value: data }),
     };
 };
