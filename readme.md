@@ -81,3 +81,13 @@ Repay Loan
 Liquidate Loan
 
 Cancel Loan
+
+
+<img width="1440" alt="Screenshot 2022-01-16 at 07 46 56" src="https://user-images.githubusercontent.com/66339097/149650302-3de7332a-92d3-4f1b-8695-eda4d7750849.png">
+<img width="1440" alt="Screenshot 2022-01-16 at 07 45 13" src="https://user-images.githubusercontent.com/66339097/149650310-6e61a7e1-3743-4420-81ce-25b6ceae75e4.png">
+
+
+
+
+
+
