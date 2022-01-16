@@ -2,11 +2,13 @@
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
+import { MsgCancelLoan } from "./types/loan/tx";
 import { MsgRequestLoan } from "./types/loan/tx";
 import { MsgApproveLoan } from "./types/loan/tx";
 import { MsgLiquidateLoan } from "./types/loan/tx";
 import { MsgRepayLoan } from "./types/loan/tx";
 const types = [
+    ["/cosmonaut.loan.loan.MsgCancelLoan", MsgCancelLoan],
     ["/cosmonaut.loan.loan.MsgRequestLoan", MsgRequestLoan],
     ["/cosmonaut.loan.loan.MsgApproveLoan", MsgApproveLoan],
     ["/cosmonaut.loan.loan.MsgLiquidateLoan", MsgLiquidateLoan],
@@ -25,6 +27,7 @@ const txClient = async (wallet, { addr: addr } = { addr: "http://localhost:26657
     const { address } = (await wallet.getAccounts())[0];
     return {
         signAndBroadcast: (msgs, { fee, memo } = { fee: defaultFee, memo: "" }) => client.signAndBroadcast(address, msgs, fee, memo),
+        msgCancelLoan: (data) => ({ typeUrl: "/cosmonaut.loan.loan.MsgCancelLoan", value: data }),
         msgRequestLoan: (data) => ({ typeUrl: "/cosmonaut.loan.loan.MsgRequestLoan", value: data }),
         msgApproveLoan: (data) => ({ typeUrl: "/cosmonaut.loan.loan.MsgApproveLoan", value: data }),
         msgLiquidateLoan: (data) => ({ typeUrl: "/cosmonaut.loan.loan.MsgLiquidateLoan", value: data }),

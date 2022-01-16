@@ -1,6 +1,7 @@
 import { StdFee } from "@cosmjs/launchpad";
 import { OfflineSigner, EncodeObject } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
+import { MsgCancelLoan } from "./types/loan/tx";
 import { MsgRequestLoan } from "./types/loan/tx";
 import { MsgApproveLoan } from "./types/loan/tx";
 import { MsgLiquidateLoan } from "./types/loan/tx";
@@ -15,6 +16,7 @@ interface SignAndBroadcastOptions {
 }
 declare const txClient: (wallet: OfflineSigner, { addr: addr }?: TxClientOptions) => Promise<{
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }?: SignAndBroadcastOptions) => Promise<import("@cosmjs/stargate").BroadcastTxResponse>;
+    msgCancelLoan: (data: MsgCancelLoan) => EncodeObject;
     msgRequestLoan: (data: MsgRequestLoan) => EncodeObject;
     msgApproveLoan: (data: MsgApproveLoan) => EncodeObject;
     msgLiquidateLoan: (data: MsgLiquidateLoan) => EncodeObject;
